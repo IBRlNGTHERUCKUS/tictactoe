@@ -1,0 +1,36 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1, h2, h3, h4, p {
+    margin: 0;
+}
+
+.scoreboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    column-gap: 20px;
+    width: clamp(300px, 50vw, 600px);
+}
+
+.game-board {
+    display: grid;
+    grid: 1fr 1fr 1fr / 1fr 1fr 1fr;
+    gap: 10px;
+    background-color: grey;
+    height: clamp(300px, 50vw, 600px);
+    width: clamp(300px, 50vw, 600px);
+}
+
+.game-board div {
+    border: black solid;
+    background-color: aqua;
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
