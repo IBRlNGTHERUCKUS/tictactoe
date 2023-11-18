@@ -1,16 +1,53 @@
+function makePlayer(playerName, markType) {
+    return {playerName, markType};
+}
+
+const Players = {
+    player1: makePlayer('player1', 'X'),
+    player2: makePlayer('player2', 'O'),
+}
+
 const GameBoard = (function() {
     let boardArray = [
-        'O', 'X', 'O',
+        'X', 'X', 'O',
         null, 'X', 'X',
         'O', null, 'X'
-    ]
+    ];
 
-    return {boardArray};
+    const getboardArray = ()=> {
+        return boardArray;
+    }
+    const resetArray = () => {
+        //Not sure why GameBoard. is required ???
+        boardArray = [
+            null, null, null,
+            null, null, null,
+            null, null, null
+        ]
+    };
+    const markArray= (index)=> {
+        console.log(`Marking index: ${index}: ${boardArray[index]}`)
+        boardArray[index]=gameLogic.getTurn().markType;
+        console.log(`Now index: ${index}: ${boardArray[index]}`)
+    }
+    return {getboardArray, resetArray, markArray};
 }) ();
 
 const gameLogic = (function() {
+    let whosTurn = Players.player1;   //private
+    const getTurn = ()=> {
+        return whosTurn;
+    }
+    const toggleTurn = () =>{
+        if (whosTurn == Players.player1) {
+            whosTurn = Players.player2;
+        }
+        else {
+            whosTurn = Players.player1;
+        }
+    }
     const checkWin = ()=> {
-        let boardArray=GameBoard.boardArray;
+        let boardArray=GameBoard.getboardArray();
         for (let i=0; i<3; i++) {
             // Check rows for win
             if (
@@ -39,7 +76,16 @@ const gameLogic = (function() {
             ) return boardArray[2];
     }
 
-    return {checkWin};
+    return {getTurn, toggleTurn, checkWin};
 }) ();
 
-console.log(gameLogic.checkRows());
+console.log(gameLogic.checkWin());
+
+console.log(GameBoard.getboardArray());
+GameBoard.resetArray();
+console.log(GameBoard.getboardArray());
+GameBoard.markArray(4);
+GameBoard.markArray(5);
+GameBoard.markArray(3);
+console.log(GameBoard.getboardArray())
+console.log(gameLogic.checkWin());
