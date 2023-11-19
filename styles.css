@@ -1,8 +1,14 @@
+@font-face {
+    font-family: Academy;
+    src: url('font/RosmatikaRegular-BWA45.ttf');
+}
+
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0;
 }
 
 h1, h2, h3, h4, p {
@@ -20,17 +26,42 @@ h1, h2, h3, h4, p {
 .game-board {
     display: grid;
     grid: 1fr 1fr 1fr / 1fr 1fr 1fr;
-    gap: 10px;
-    background-color: grey;
+    gap: 2px;
+    background-color: black;
     height: clamp(300px, 50vw, 600px);
     width: clamp(300px, 50vw, 600px);
 }
 
 .game-board div {
-    border: black solid;
-    background-color: aqua;
+
+    background-color: white;
     font-size: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    animation-name: hidetext;
+    font-family: Academy;
+}
+
+.board-grid:nth-child(1),
+.board-grid:nth-child(2),
+.board-grid:nth-child(3) {
+    animation-duration: 0.5s;
+}
+
+.board-grid:nth-child(4),
+.board-grid:nth-child(5),
+.board-grid:nth-child(6) {
+    animation-duration: 1s;
+}
+
+.board-grid:nth-child(7),
+.board-grid:nth-child(8),
+.board-grid:nth-child(9) {
+    animation-duration: 1.5s;
+}
+
+@keyframes hidetext {
+    from {color: white;}
+    to {color:white;}
 }

@@ -33,9 +33,9 @@ const ScoreBoard = (function() {
 
 const GameBoard = (function() {
     let boardArray = [      //private
-        'X', 'X', 'O',
-        null, 'X', 'X',
-        'O', null, 'X'
+        'T', 'I', 'C',
+        'T', 'A', 'C',
+        'T', 'O', 'E'
     ];
 
     const getboardArray = ()=> {
@@ -125,9 +125,9 @@ function update() {
     p2ScoreElement.textContent = `${Players.player2.playerName} 
     (${Players.player2.markType}): ${ScoreBoard.getScore(Players.player2)}`;
 }
-
-GameBoard.resetArray();
 update();
+GameBoard.resetArray();
+setTimeout(update, 3000);
 
 
 function handleCellClick(e) {
@@ -142,8 +142,11 @@ function handleCellClick(e) {
         GameBoard.markArray(index);
         //Check for a win
         if (gameLogic.checkWin()) {
+            update();
             ScoreBoard.incrementScore(gameLogic.getTurn());
             GameBoard.resetArray();
+            setTimeout(update, 500);
+            return;
         }
         //Check for a draw
         else if (GameBoard.isFull()) {
