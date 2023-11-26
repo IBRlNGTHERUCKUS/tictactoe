@@ -27,7 +27,11 @@ const ScoreBoard = (function() {
         }
 
     }
-    return {getScore, incrementScore};
+    const resetScore = ()=> {
+        player1Score=0;
+        player2Score=0;
+    }
+    return {getScore, incrementScore, resetScore};
 }
 ) ();
 
@@ -108,7 +112,14 @@ const gameLogic = (function() {
             ) return true;
     }
 
-    return {getTurn, toggleTurn, checkWin};
+    const resetGame = ()=> {
+        whosTurn = Players.player1;
+        GameBoard.resetArray();
+        ScoreBoard.resetScore();
+        update();
+    }
+
+    return {getTurn, toggleTurn, checkWin, resetGame};
 }) ();
 
 ////////////////////////////// Dom manipulation /////////////////
@@ -181,7 +192,7 @@ for (let element of boardCellElements) {
     element.addEventListener('click', handleCellClick)
 }
 
-// Make name editing boxes match size
+// Make name editing boxes synched with displayed names
 let inputs = document.querySelectorAll('input');
 inputs[0].addEventListener('input', (e)=>{
     Players.player1.playerName = e.target.value;
@@ -191,3 +202,7 @@ inputs[1].addEventListener('input', (e)=>{
     Players.player2.playerName = e.target.value;
     update();
 })
+
+// Reset button
+const resetButton = document.querySelector('.reset-button');
+resetButton.addEventListener('click', gameLogic.resetGame);

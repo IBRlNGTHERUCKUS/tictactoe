@@ -99,3 +99,15 @@ input:focus {
     align-items: center;
     position: relative;
 }
+
+.reset-button {
+    border: none;
+    padding: 0px;
+    background: none;
+    position: fixed;
+    bottom: 12px;
+}
+
+.reset-image {
+    width: 32px;
+}
