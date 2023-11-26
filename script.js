@@ -114,7 +114,8 @@ const gameLogic = (function() {
 const boardCellElements = document.querySelectorAll('.board-grid');
 const p1ScoreElement = document.querySelector('.player1');
 const p2ScoreElement = document.querySelector('.player2');
-function update() {
+const turnIndicatorElement = document.querySelector('.turn-indicator');
+function update(condition=null) {
     let i = 0;
     for (let element of boardCellElements) {
         element.textContent=GameBoard.getboardArray()[i];
@@ -124,6 +125,17 @@ function update() {
      (${Players.player1.markType}): ${ScoreBoard.getScore(Players.player1)}`;
     p2ScoreElement.textContent = `${Players.player2.playerName} 
     (${Players.player2.markType}): ${ScoreBoard.getScore(Players.player2)}`;
+
+    // 
+    if (condition === 'win') {
+        turnIndicatorElement.textContent = `${gameLogic.getTurn().playerName} (${gameLogic.getTurn().markType}) wins!`
+    }
+    else if (condition === 'draw') {
+        turnIndicatorElement.textContent = 'It\'s a tie!'
+    }
+    else {
+        turnIndicatorElement.textContent = `${gameLogic.getTurn().markType}'s turn`
+    }
 }
 update();
 GameBoard.resetArray();
@@ -142,15 +154,21 @@ function handleCellClick(e) {
         GameBoard.markArray(index);
         //Check for a win
         if (gameLogic.checkWin()) {
-            update();
+            update('win');
             ScoreBoard.incrementScore(gameLogic.getTurn());
             GameBoard.resetArray();
-            setTimeout(update, 500);
+
+            gameLogic.toggleTurn();
+            setTimeout(update, 1400);
             return;
         }
         //Check for a draw
         else if (GameBoard.isFull()) {
             GameBoard.resetArray();
+            gameLogic.toggleTurn();
+            update('draw');
+            setTimeout(update, 1400);
+            return;
         }
         gameLogic.toggleTurn();
         update();
