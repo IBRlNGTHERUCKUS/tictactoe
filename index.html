@@ -9,13 +9,22 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <header>
-        <h1>Tic Tac Toe</h1>
-    </header>
     <div class="scoreboard">
-        <h2 class="player1"></h2>
+        <div class="scoreboard-left">
+            <label for="player1"><img src="./images/edit-icon.svg" alt="" class="icon edit-icon"></label>
+            <div class="player-container">
+                <input id="player1" type="text" value="Player 1">
+                <h2 class="player1"></h2>
+            </div>
+        </div>
 
-        <h2 class="player2"></h2>
+        <div class="scoreboard-right">
+            <label for="player2"><img src="./images/edit-icon.svg" alt="" class="icon edit-icon"></label>
+            <div class="player-container">
+                <input id="player2" type="text" value="Player 2">
+                <h2 class="player2"></h2>
+            </div>
+        </div>
     </div>
     <div class="game-board">
         <div class="board-grid" data-index="0"></div>
@@ -28,6 +37,6 @@
         <div class="board-grid" data-index="7"></div>
         <div class="board-grid" data-index="8"></div>
     </div>
-    <div class="turn-indicator"></div>
+    <h2 class="turn-indicator"></h2>
 </body>
 </html>

@@ -111,6 +111,8 @@ const gameLogic = (function() {
     return {getTurn, toggleTurn, checkWin};
 }) ();
 
+////////////////////////////// Dom manipulation /////////////////
+
 const boardCellElements = document.querySelectorAll('.board-grid');
 const p1ScoreElement = document.querySelector('.player1');
 const p2ScoreElement = document.querySelector('.player2');
@@ -178,3 +180,14 @@ function handleCellClick(e) {
 for (let element of boardCellElements) {
     element.addEventListener('click', handleCellClick)
 }
+
+// Make name editing boxes match size
+let inputs = document.querySelectorAll('input');
+inputs[0].addEventListener('input', (e)=>{
+    Players.player1.playerName = e.target.value;
+    update();
+})
+inputs[1].addEventListener('input', (e)=>{
+    Players.player2.playerName = e.target.value;
+    update();
+})
